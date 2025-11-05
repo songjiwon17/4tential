@@ -43,6 +43,10 @@ const theme = extendTheme({
         subText: {
           fontSize: ['12px', '14px', '16px', '18px'],
         },
+        profileInputText: {
+          fontSize: ['12px', '14px', '16px', '18px'],
+          color: '#C7C7C7',
+        },
       },
     },
 

@@ -1,11 +1,12 @@
 import MainTitle from '../../components/MainTitle';
 import SubText from '../../components/SubText';
-import { Box, Flex } from '@chakra-ui/react';
+import ProfileContentsBox from './ProfileContentsBox';
+import { Flex } from '@chakra-ui/react';
 
 const Profile = () => {
   return (
     <Flex direction={'column'} justifyContent={'center'} alignItems={'center'}>
-      <MainTitle mainTitle={'프로필'} />
+      <MainTitle mainTitle={'프로필'} mt={10} />
       <SubText
         subText={
           <>
@@ -17,7 +18,7 @@ const Profile = () => {
         }
       />
 
-      <Box width={'954px'} height={'700px'}></Box>
+      <ProfileContentsBox />
     </Flex>
   );
 };

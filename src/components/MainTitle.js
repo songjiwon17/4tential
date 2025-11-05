@@ -1,8 +1,8 @@
 import { Text } from '@chakra-ui/react';
 
-const MainTitle = ({ mainTitle = '' }) => {
+const MainTitle = ({ mainTitle = '', fontWeight = 'bold' }) => {
   return (
-    <Text mt={10} fontWeight={'bold'} textAlign={'center'}>
+    <Text mt={5} fontWeight={fontWeight} textAlign={'center'}>
       {mainTitle}
     </Text>
   );
