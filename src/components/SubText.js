@@ -2,7 +2,7 @@ import { Text } from '@chakra-ui/react';
 
 const SubText = ({ subText = '' }) => {
   return (
-    <Text mt={5} fontSize={'sm'} textAlign={'center'}>
+    <Text variant="subText" mt={5} textAlign={'center'}>
       {subText}
     </Text>
   );

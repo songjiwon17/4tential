@@ -1,6 +1,13 @@
 import { extendTheme } from '@chakra-ui/react';
 
 const theme = extendTheme({
+  breakpoints: {
+    sm: '480px', // 모바일
+    md: '768px', // 태블릿
+    lg: '1024px', // 창 줄인 데스크탑
+    xl: '1440px', // 기본 데스크탑
+  },
+
   styles: {
     global: {
       'html, body': {
@@ -28,6 +35,17 @@ const theme = extendTheme({
   },
 
   components: {
+    Text: {
+      baseStyle: {
+        fontSize: ['14px', '16px', '18px', '24px'],
+      },
+      variants: {
+        subText: {
+          fontSize: ['12px', '14px', '16px', '18px'],
+        },
+      },
+    },
+
     Container: {
       baseStyle: {
         maxW: '1440px',
@@ -56,13 +74,6 @@ const theme = extendTheme({
     //     }),
     //   },
     // },
-  },
-
-  breakpoints: {
-    sm: '480px',
-    md: '768px',
-    lg: '1024px',
-    xl: '1440px',
   },
 });
 
