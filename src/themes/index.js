@@ -47,6 +47,10 @@ const theme = extendTheme({
           fontSize: ['12px', '14px', '16px', '18px'],
           color: '#C7C7C7',
         },
+        foodInfoText: {
+          fontSize: ['18px', '20px', '22px', '24px'],
+          color: '#000000',
+        },
       },
     },
 
