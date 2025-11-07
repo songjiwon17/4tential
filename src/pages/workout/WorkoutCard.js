@@ -1,5 +1,6 @@
 import { Box, Image, Text, VStack } from '@chakra-ui/react';
 import MainTitle from '../../components/MainTitle';
+import TypeButton from '../../components/TypeButton';
 
 const WorkoutCard = ({
   title,
@@ -31,24 +32,8 @@ const WorkoutCard = ({
         {/* 텍스트 내용 영역 (하단) */}
         <VStack align="flex-start" spacing={1} p={5} w="full">
           {/* 운동 종류 (다이어트, 체력향상 등)*/}
-          <Text
-            fontSize="xs"
-            color="#fff"
-            p="2px 8px"
-            border="1px solid #fff"
-            borderRadius="5px"
-            mb={2}
-          >
-            {type}
-          </Text>
-
-          <MainTitle
-            mainTitle={title}
-            fontWeight="bold"
-            mt={0}
-            textAlign="left"
-            fontSize="xl"
-          />
+          <TypeButton value={type} />
+          <MainTitle mainTitle={title} />
 
           {/* 상세 정보 목록 */}
           <VStack
