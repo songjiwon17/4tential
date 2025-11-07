@@ -19,8 +19,20 @@ const TypeBtn = chakra(Button, {
   },
 });
 
-const TypeButton = ({ value = '' }) => {
-  return <TypeBtn>{value}</TypeBtn>;
+const TypeButton = ({
+  value = '',
+  isSelected = false,
+  onChange = () => {},
+}) => {
+  return (
+    <TypeBtn
+      bg={isSelected ? '#EAEAEA' : 'transparent'}
+      color={isSelected ? '#050202' : '#fff'}
+      onClick={() => onChange(value)}
+    >
+      {value}
+    </TypeBtn>
+  );
 };
 
 export default TypeButton;

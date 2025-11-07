@@ -11,7 +11,10 @@ const InputBox = chakra(Input, {
   },
 });
 
-const ProfileInputBox = () => {
-  return <InputBox />;
+const ProfileInputBox = ({ type, value, onChange }) => {
+  return (
+    <InputBox value={value} onChange={(e) => onChange(type, e.target.value)} />
+  );
 };
+
 export default ProfileInputBox;
