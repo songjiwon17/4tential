@@ -12,8 +12,8 @@ const SaveBtn = chakra(Button, {
   },
 });
 
-const ProfileSaveBtn = ({ value = '' }) => {
-  return <SaveBtn>{value}</SaveBtn>;
+const ProfileSaveBtn = ({ value = '', onClick }) => {
+  return <SaveBtn onClick={onClick}>{value}</SaveBtn>;
 };
 
 export default ProfileSaveBtn;

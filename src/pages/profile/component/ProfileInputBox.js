@@ -11,9 +11,12 @@ const InputBox = chakra(Input, {
   },
 });
 
-const ProfileInputBox = ({ type, value, onChange }) => {
+const ProfileInputBox = ({ detailKey, value, onChange }) => {
   return (
-    <InputBox value={value} onChange={(e) => onChange(type, e.target.value)} />
+    <InputBox
+      value={value}
+      onChange={(e) => onChange(detailKey, e.target.value)}
+    />
   );
 };
 

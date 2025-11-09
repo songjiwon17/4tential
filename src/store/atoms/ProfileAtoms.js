@@ -17,7 +17,7 @@ export const ProfileDetailTypes = {
   bodyFat: '',
 };
 
-export const profileDetailLabelKey = {
+export const profileDetailKey = {
   name: '이름',
   weight: '체중',
   height: '키',
@@ -25,10 +25,15 @@ export const profileDetailLabelKey = {
   bodyFat: '체지방량',
 };
 
-export const profileDetailTypeAtom = atom({
+export const profileDetailKeyAtom = atom({
   name: '',
   weight: '',
   height: '',
   muscle: '',
   bodyFat: '',
+});
+
+export const profileSavedAtom = atom({
+  type: ProfileTypes.Diet,
+  ...ProfileDetailTypes,
 });

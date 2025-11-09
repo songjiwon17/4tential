@@ -1,26 +1,31 @@
-import { useAtom } from 'jotai';
-import { profileTypeAtom, profileDetailTypeAtom } from '../../../store/atoms';
+import { useAtom, useAtomValue } from 'jotai';
+import {
+  profileTypeAtom,
+  profileDetailKeyAtom,
+  profileSavedAtom,
+} from '../../../store/atoms';
 
 const useProfile = () => {
-  const [profileType, setProfileType] = useAtom(profileTypeAtom);
-  const [profileDetail, setProfileDetail] = useAtom(profileDetailTypeAtom);
+  const profileType = useAtomValue(profileTypeAtom);
+  const profileDetail = useAtomValue(profileDetailKeyAtom);
+  const [profileSave, setProfileSave] = useAtom(profileSavedAtom);
 
-  const handleChangeProfileType = (value) => {
-    setProfileType(value);
+  // 운동 목적 변경 시 이벤트 처리
+  const handleChangeProfileType = (type) => {
+    setProfileSave((prev) => ({ ...prev, type }));
   };
 
-  const handleDetailChange = (key, newValue) => {
-    setProfileDetail((prev) => ({
-      ...prev,
-      [key]: newValue,
-    }));
+  // 프로필 정보 변경 시 이벤트 처리
+  const handleChangeDetails = (key, newValue) => {
+    setProfileSave((prev) => ({ ...prev, [key]: newValue }));
   };
 
   return {
     profileType,
     profileDetail,
+    profileSave,
     handleChangeProfileType,
-    handleDetailChange,
+    handleChangeDetails,
   };
 };
 

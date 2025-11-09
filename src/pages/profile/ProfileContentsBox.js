@@ -8,19 +8,15 @@ import useProfile from './hooks/useProfile';
 import {
   ProfileDetailTypes,
   ProfileTypes,
-  profileDetailLabelKey,
+  profileDetailKey,
 } from '../../store/atoms';
 import { Flex, HStack, Text, VStack } from '@chakra-ui/react';
 
 const ProfileContentsBox = () => {
-  const {
-    profileType,
-    profileDetail,
-    handleChangeProfileType,
-    handleDetailChange,
-  } = useProfile();
+  const { profileSave, handleChangeProfileType, handleChangeDetails } =
+    useProfile();
 
-  const isSelected = (type) => profileType === type;
+  const isSelected = (type) => profileSave.type === type;
 
   return (
     <ContentsBox>
@@ -36,26 +32,14 @@ const ProfileContentsBox = () => {
 
       {/*  운동 목적 4가지 버튼 */}
       <Flex mt={30} gap={6} alignSelf="center">
-        <TypeButton
-          value={ProfileTypes.Diet}
-          isSelected={isSelected(ProfileTypes.Diet)}
-          onChange={handleChangeProfileType}
-        />
-        <TypeButton
-          value={ProfileTypes.BoostPhysical}
-          isSelected={isSelected(ProfileTypes.BoostPhysical)}
-          onChange={handleChangeProfileType}
-        />
-        <TypeButton
-          value={ProfileTypes.IncreasedStrength}
-          isSelected={isSelected(ProfileTypes.IncreasedStrength)}
-          onChange={handleChangeProfileType}
-        />
-        <TypeButton
-          value={ProfileTypes.BodyShapeCorrection}
-          isSelected={isSelected(ProfileTypes.BodyShapeCorrection)}
-          onChange={handleChangeProfileType}
-        />
+        {Object.values(ProfileTypes).map((type) => (
+          <TypeButton
+            key={type}
+            value={type}
+            isSelected={isSelected(type)}
+            onChange={() => handleChangeProfileType(type)}
+          />
+        ))}
       </Flex>
 
       {/* 프로필 정보 입력 */}
@@ -73,19 +57,25 @@ const ProfileContentsBox = () => {
               whiteSpace="nowrap"
               minW="80px"
             >
-              {profileDetailLabelKey[key] || key}
+              {profileDetailKey[key] || key}
             </Text>
             <ProfileInputBox
               flex="2"
-              type={key}
-              value={profileDetail[key]}
-              onChange={handleDetailChange}
+              detailKey={key}
+              value={profileSave[key]}
+              onChange={handleChangeDetails}
             />
           </HStack>
         ))}
       </VStack>
 
-      <ProfileSaveBtn value={'저장하기'} />
+      {/*  저장하기 버튼을 누르면 운동 목적과 프로필 정보가 콘솔에 찍히도록 구현*/}
+      <ProfileSaveBtn
+        value={'저장하기'}
+        onClick={() => {
+          console.log('SAVED PROFILES:', profileSave);
+        }}
+      />
     </ContentsBox>
   );
 };
