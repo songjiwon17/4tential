@@ -40,6 +40,14 @@ const theme = extendTheme({
         fontSize: ['14px', '16px', '18px', '24px'],
       },
       variants: {
+        mainMessageText: {
+          fontSize: ['16px', '20px', '24px', '28px'],
+          fontWeight: 'bold',
+          textAlign: 'center',
+          whiteSpace: 'normal',
+          wordBreak: 'break-word',
+          color: '#ffffff',
+        },
         subText: {
           fontSize: ['12px', '14px', '16px', '18px'],
         },
