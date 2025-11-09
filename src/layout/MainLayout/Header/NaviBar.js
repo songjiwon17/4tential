@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
-import { Flex, Button, Box, Heading } from '@chakra-ui/react';
+import { Flex, Button } from '@chakra-ui/react';
 
 const menus = [
   { title: '프로필', path: '/' },
@@ -12,7 +12,7 @@ const NaviBar = () => {
   const location = useLocation();
 
   return (
-    <Flex gap={10}>
+    <Flex alignItems={'center'} gap={10}>
       {menus.map((menu) => (
         <Button
           key={menu.path}
@@ -20,7 +20,7 @@ const NaviBar = () => {
           as={Link}
           variant="unstyled"
           color={location.pathname === menu.path ? '#FFFFFF' : '#7D7D7D'}
-          fontSize={'xl'}
+          fontSize={['14px', '16px', '18px', '24px']}
         >
           {menu.title}
         </Button>

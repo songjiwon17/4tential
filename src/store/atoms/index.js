@@ -1,1 +1,1 @@
-export * from './PageAtoms';
+export * from './ProfileAtoms';

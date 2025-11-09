@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import MainRoutes from '../../../routes/MainRoutes';
 import NaviBar from './NaviBar';
-import { Box, Button, chakra, Text } from '@chakra-ui/react';
+import { Box, Button, chakra, Text, Stack } from '@chakra-ui/react';
 
 const NaviBox = chakra(Box, {
   baseStyle: {
@@ -33,21 +33,25 @@ const Header = () => {
   }, []);
 
   return (
-    <NaviBox bg={isScrolled ? 'rgba(5, 2, 2, 0.95)' : 'transparent'}>
-      <Text fontSize={'2xl'} fontWeight={800}>
-        4TENTIAL
-      </Text>
+    <Stack>
+      <NaviBox bg={isScrolled ? 'rgba(5, 2, 2, 0.95)' : 'transparent'}>
+        <Text fontWeight={'bold'}>4TENTIAL</Text>
 
-      <NaviBar
-        navigation={{ items: [{ ...MainRoutes }] }}
-        title={true}
-        root={MainRoutes.root}
-      />
+        <NaviBar
+          navigation={{ items: [{ ...MainRoutes }] }}
+          title={true}
+          root={MainRoutes.root}
+        />
 
-      <Button variant="unstyled" color={'#FFFFFF'} fontSize={'xl'}>
-        로그인
-      </Button>
-    </NaviBox>
+        <Button
+          variant="unstyled"
+          color={'#FFFFFF'}
+          fontSize={['14px', '16px', '18px', '24px']}
+        >
+          로그인
+        </Button>
+      </NaviBox>
+    </Stack>
   );
 };
 export default Header;
