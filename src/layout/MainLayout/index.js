@@ -1,13 +1,14 @@
 import { Outlet, useLocation } from 'react-router-dom';
+import { useMainMessage } from '../../store/query/QueryPath';
 import Header from './Header/Header';
 import MainImage from './Main/MainImage';
-import { useMainMessage } from '../../store/query/QueryPath';
+import Footer from './Footer/Footer';
 
 const MainLayout = () => {
-  const mainPageLoocation = useLocation();
+  const mainPageLocation = useLocation();
   const mainImage =
-    mainPageLoocation.pathname === '/profile' ||
-    mainPageLoocation.pathname === '/';
+    mainPageLocation.pathname === '/profile' ||
+    mainPageLocation.pathname === '/';
 
   const { data: message } = useMainMessage();
 
@@ -16,6 +17,7 @@ const MainLayout = () => {
       <Header />
       {mainImage && <MainImage message={message} />}
       <Outlet />
+      <Footer />
     </>
   );
 };
