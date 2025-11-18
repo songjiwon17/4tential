@@ -20,10 +20,8 @@ const theme = extendTheme({
         fontFamily: "'Inter', 'Noto Sans KR', sans-serif",
       },
       '#root': {
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        flexDirection: 'column',
+        width: '100%',
+        minHeight: '100vh',
       },
     },
   },
@@ -58,6 +56,11 @@ const theme = extendTheme({
         foodInfoText: {
           fontSize: ['18px', '20px', '22px', '24px'],
           color: '#000000',
+        },
+        loginInfonText: {
+          fontSize: ['12px', '14px', '16px', '18px'],
+          color: '#000000',
+          textAlign: 'center',
         },
       },
     },

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import MainRoutes from '../../../routes/MainRoutes';
 import NaviBar from './NaviBar';
 import { Box, Button, chakra, Text, Stack } from '@chakra-ui/react';
@@ -44,6 +45,8 @@ const Header = () => {
         />
 
         <Button
+          as={Link}
+          to="/login"
           variant="unstyled"
           color={'#FFFFFF'}
           fontSize={['14px', '16px', '18px', '24px']}

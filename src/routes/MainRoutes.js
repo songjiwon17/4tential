@@ -3,6 +3,7 @@ import Profile from '../pages/profile';
 import MyBody from '../pages/myBody';
 import Workout from '../pages/workout';
 import Food from '../pages/food';
+import Login from '../pages/login';
 
 const MainRoutes = {
   type: 'main',
@@ -34,6 +35,12 @@ const MainRoutes = {
       title: 'food',
       path: '/food',
       element: <Food />,
+    },
+    {
+      type: 'item',
+      title: 'login',
+      path: '/login',
+      element: <Login />,
     },
   ],
 };
