@@ -12,7 +12,7 @@ import {
 } from '../../store/atoms';
 import { Flex, HStack, Text, VStack } from '@chakra-ui/react';
 
-const ProfileContentsBox = () => {
+const ProfileContentsBox = ({ onSave }) => {
   const { profileSave, handleChangeProfileType, handleChangeDetails } =
     useProfile();
 
@@ -73,7 +73,7 @@ const ProfileContentsBox = () => {
       <ProfileSaveBtn
         value={'저장하기'}
         onClick={() => {
-          console.log('SAVED PROFILES:', profileSave);
+          onSave(profileSave);
         }}
       />
     </ContentsBox>

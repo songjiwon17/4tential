@@ -2,11 +2,11 @@ import ProfileTitle from './ProfileTitle';
 import ProfileContentsBox from './ProfileContentsBox';
 import { Flex } from '@chakra-ui/react';
 
-const Profile = () => {
+const Profile = ({ onSave }) => {
   return (
     <Flex direction={'column'} justifyContent={'center'} alignItems={'center'}>
       <ProfileTitle />
-      <ProfileContentsBox />
+      <ProfileContentsBox onSave={onSave} />
     </Flex>
   );
 };

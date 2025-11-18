@@ -1,5 +1,5 @@
 import MainLayout from '../layout/MainLayout';
-import Profile from '../pages/profile';
+import ProfileBody from '../pages/ProfileBody';
 import MyBody from '../pages/myBody';
 import Workout from '../pages/workout';
 import Food from '../pages/food';
@@ -16,7 +16,7 @@ const MainRoutes = {
       type: 'item',
       title: 'profile',
       path: '/',
-      element: <Profile />,
+      element: <ProfileBody />,
     },
     {
       type: 'item',
