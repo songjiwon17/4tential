@@ -4,14 +4,13 @@ const StyledFoodRecomendationBtn = chakra(Button, {
   baseStyle: {
     variant: 'unstyled',
     width: 'auto',
-    height: '30px',
     border: '1px solid #fff',
     backgroundColor: 'transparent',
     borderRadius: '50px',
     color: '#fff',
     fontWeight: 'normal',
     _hover: {
-      backgroundColor: '##EAEAEA',
+      backgroundColor: '#EAEAEA',
       color: '#050202',
     },
     transition:
@@ -21,7 +20,12 @@ const StyledFoodRecomendationBtn = chakra(Button, {
 
 const FoodRecomendationBtn = ({ value = '', onClick }) => {
   return (
-    <StyledFoodRecomendationBtn onClick={() => onClick && onClick(value)}>
+    <StyledFoodRecomendationBtn
+      onClick={() => onClick && onClick(value)}
+      h={{ base: '30px', md: '40px' }}
+      px={{ base: '12px', md: '20px' }}
+      fontSize={{ base: '13px', md: '16px' }}
+    >
       {value}
     </StyledFoodRecomendationBtn>
   );

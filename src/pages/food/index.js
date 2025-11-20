@@ -4,14 +4,13 @@ import FoodTitle from './FoodTitle';
 
 const Food = () => {
   return (
-    <Flex
-      direction={'column'}
-      justifyContent={'center'}
-      alignItems={'center'}
-      pt="120px"
-    >
+    <Flex direction={'column'} justifyContent={'center'} alignItems={'center'}>
       <FoodTitle />
-      <Box mt="45px">
+      <Box
+        mt="45px"
+        w={{ base: '100%', lg: '1000px' }}
+        px={{ base: '20px', lg: '0' }}
+      >
         <FoodContentsBox />
       </Box>
     </Flex>
