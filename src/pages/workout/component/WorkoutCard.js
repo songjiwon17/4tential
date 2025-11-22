@@ -1,4 +1,4 @@
-import { Image, Text, VStack } from '@chakra-ui/react';
+import { Image, Text, VStack, Box } from '@chakra-ui/react';
 import Card from '../../../components/Card';
 import Badge from '../../../components/Badge';
 import TypeButton from '../../../components/TypeButton';
@@ -18,9 +18,11 @@ const WorkoutCard = ({ workout, isRecommended }) => {
         />
 
         <VStack align="flex-start" spacing={3} p={5} w="full">
-          <TypeButton value={workout.type} isSelected={isRecommended} />
+          <Box maxW="100%">
+            <TypeButton value={workout.type} isSelected={isRecommended} />
+          </Box>
 
-          <Text fontSize="lg" fontWeight="bold" color="#fff">
+          <Text fontSize="lg" fontWeight="bold" color="#fff" noOfLines={2}>
             {workout.title}
           </Text>
 
@@ -35,7 +37,7 @@ const WorkoutCard = ({ workout, isRecommended }) => {
             <Text>시간: {workout.time}</Text>
             <Text>세트: {workout.sets}</Text>
             {workout.rest && <Text>휴식: {workout.rest}</Text>}
-            <Text mt={2} color="#888" fontSize="xs">
+            <Text mt={2} color="#888" fontSize="xs" noOfLines={3}>
               {workout.description}
             </Text>
           </VStack>

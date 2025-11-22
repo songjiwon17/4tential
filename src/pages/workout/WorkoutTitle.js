@@ -1,8 +1,8 @@
 import { VStack, Text } from '@chakra-ui/react';
 import { useAtomValue } from 'jotai';
-import { profileSavedAtom } from '../../../store/atoms';
-import MainTitle from '../../../components/MainTitle';
-import SubText from '../../../components/SubText';
+import { profileSavedAtom } from '../../store/atoms';
+import MainTitle from '../../components/MainTitle';
+import SubText from '../../components/SubText';
 
 const WorkoutTitle = () => {
   const profileSave = useAtomValue(profileSavedAtom);

@@ -1,25 +1,31 @@
-import ContentsBox from '../../../components/ContentsBox';
 import { Flex } from '@chakra-ui/react';
 import { useAtomValue } from 'jotai';
-import { profileSavedAtom, ProfileTypes } from '../../../store/atoms';
-import TypeButton from '../../../components/TypeButton';
-import SubText from '../../../components/SubText';
-import Line from '../../../components/Line';
-import useWorkout from '../hooks/useWorkout';
-import MealPlanCard from './MealPlanCard';
-import WorkoutList from './WorkoutList';
-import { mockWorkouts, mockMealPlan } from '../mock/mockWorkouts';
+import { profileSavedAtom, ProfileTypes } from '../../store/atoms';
+import ContentsBox from '../../components/ContentsBox';
+import TypeButton from '../../components/TypeButton';
+import SubText from '../../components/SubText';
+import Line from '../../components/Line';
+import useWorkout from './hooks/useWorkout';
+import MealPlanCard from './component/MealPlanCard';
+import WorkoutList from './component/WorkoutList';
+import { mealPlansByType, mockMealPlan } from './mock/mockWorkouts';
 
 const WorkoutContentsBox = () => {
   const profileSave = useAtomValue(profileSavedAtom);
-  const { selectedType, handleTypeClick, isProfileSaved } = useWorkout(
-    mockWorkouts,
-    profileSave
-  );
 
-  const hasProfile = isProfileSaved();
-  const userGoal = profileSave.type;
-  const userName = profileSave.name;
+  // useWorkout hook에서 필요한 모든 데이터 가져오기
+  const {
+    selectedType,
+    handleTypeClick,
+    isProfileSaved,
+    workouts, // API로부터 받은 운동 데이터
+    isLoading,
+    error,
+  } = useWorkout(profileSave);
+
+  const hasProfile = isProfileSaved;
+  const userGoal = profileSave?.type;
+  const userName = profileSave?.name;
 
   const workoutTypes = hasProfile
     ? [
@@ -28,6 +34,14 @@ const WorkoutContentsBox = () => {
         ...Object.values(ProfileTypes).filter((t) => t !== userGoal),
       ]
     : ['전체', ...Object.values(ProfileTypes)];
+
+  // 선택된 타입에 따른 식단
+  const getCurrentMealPlan = () => {
+    if (selectedType === '전체') {
+      return hasProfile && userGoal ? mealPlansByType[userGoal] : mockMealPlan;
+    }
+    return mealPlansByType[selectedType] || mockMealPlan;
+  };
 
   return (
     <ContentsBox>
@@ -53,12 +67,16 @@ const WorkoutContentsBox = () => {
       />
 
       <MealPlanCard
-        mealPlan={mockMealPlan}
+        mealPlan={getCurrentMealPlan()}
         userGoal={hasProfile ? userGoal : null}
         userName={hasProfile ? userName : null}
       />
 
+      {/* API 데이터와 상태를 WorkoutList에 전달 */}
       <WorkoutList
+        workouts={workouts}
+        isLoading={isLoading}
+        error={error}
         selectedType={selectedType}
         hasProfile={hasProfile}
         userGoal={userGoal}
