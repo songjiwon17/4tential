@@ -31,7 +31,7 @@ const ProfileContentsBox = ({ onSave }) => {
       </Text>
 
       {/*  운동 목적 4가지 버튼 */}
-      <Flex mt={30} gap={6} alignSelf="center">
+      <Flex mt={30} gap={6} alignSelf="center" flexWrap="wrap">
         {Object.values(ProfileTypes).map((type) => (
           <TypeButton
             key={type}
@@ -43,7 +43,7 @@ const ProfileContentsBox = ({ onSave }) => {
       </Flex>
 
       {/* 프로필 정보 입력 */}
-      <VStack spacing={10} mt={12} alignSelf="center">
+      <VStack spacing={10} mt={12} width="100%" maxW="730px" alignSelf="center">
         {Object.keys(ProfileDetailTypes).map((key) => (
           <HStack
             key={key}

@@ -31,7 +31,10 @@ const InputBox = chakra(Input, {
     backgroundColor: 'transparent',
     borderRadius: '5px',
     color: '#000',
-    _placeholder: { color: '#7D7D7D', fontSize: '14px' },
+    _placeholder: {
+      color: '#7D7D7D',
+      fontSize: ['10px', '12px', '14px', '16px'],
+    },
   },
 });
 
@@ -43,6 +46,7 @@ const LoginBtn = chakra(Button, {
     backgroundColor: 'transparent',
     borderRadius: '5px',
     color: '#7D7D7D',
+    fontSize: ['12px', '14px', '16px', '18px'],
     _hover: {
       backgroundColor: 'transparent',
     },
@@ -69,14 +73,14 @@ const Login = () => {
           gap={2.5}
         >
           <Box width={'20px'} height={'2px'} backgroundColor={'#3C3C3C'}></Box>
-          <Text fontSize={'18px'} color={'#7D7D7D'}>
+          <Text variant={'loginInfonText'} color={'#7D7D7D'}>
             아이디
           </Text>
           <InputBox
             placeholder={'신체정보 등록에 사용할 아이디를 입력하세요.'}
           />
 
-          <Text fontSize={'18px'} color={'#7D7D7D'}>
+          <Text variant={'loginInfonText'} color={'#7D7D7D'}>
             비밀번호
           </Text>
           <InputBox placeholder={'비밀번호를 입력하세요.'} />
