@@ -1,55 +1,82 @@
-import ContentsBox from '../../components/ContentsBox';
-import MainTitle from '../../components/MainTitle';
-import CurrentStatus from './component/CurrentStatus';
-import PredictedChanges from './component/PredictedChanges';
-import BodyTypeTimeline from './component/BodyTypeTimeline';
-import { Box, VStack, Text } from '@chakra-ui/react';
+import { useAtomValue } from 'jotai';
+import { useState } from 'react';
+import { profileSavedAtom } from '../../store/atoms/ProfileAtoms';
 
-const MyBodyContentsBox = () => {
+import {
+  getBmi,
+  getBmiClass,
+  getFatPercent,
+  getBodyPrediction,
+} from './utils/bodyCalc';
+import BodyShapePreview from './component/BodyShapePreview';
+
+const MONTHS = [0, 3, 6, 12];
+const LABELS = ['현재', '3개월 후', '6개월 후', '1년 후'];
+
+function MyBodyContentsBox() {
+  const [slider, setSlider] = useState(0);
+  const profile = useAtomValue(profileSavedAtom);
+
+  // 현재 값
+  const weight = Number(profile.weight) || 70;
+  const height = Number(profile.height) || 170;
+  const muscle = Number(profile.muscle) || 25;
+  const bodyFat = Number(profile.bodyFat) || 15;
+  const goalType = profile.type || '다이어트'; // ✅ 수정: goalType → type
+
+  // 슬라이더에 따라 시점별 값
+  const {
+    weight: w,
+    muscle: m,
+    bodyFat: f,
+  } = slider === 0
+    ? { weight, muscle, bodyFat }
+    : getBodyPrediction({
+        weight,
+        height, // ✅ 추가: 정상체중 계산용
+        muscle,
+        bodyFat,
+        months: MONTHS[slider],
+        goalType,
+      });
+
+  // BMI·등급 등 표시
+  const bmi = getBmi(w, height);
+  const bmiClass = getBmiClass(bmi);
+  const fatPercent = getFatPercent(w, f);
+
   return (
-    <ContentsBox height={'auto'} minHeight={'700px'}>
-      {/* Line 대신 직접 Box 사용 - 끝까지 가도록 */}
-      <Box
-        width={'100%'}
-        height={'2px'}
-        marginTop={'8px'}
-        backgroundColor={'#ffffff'}
-        mb={6}
-      />
-
-      <MainTitle mainTitle={'나의 체형 분석'} fontWeight={'normal'} />
-
-      {/* 1. 현재 상태 및 체형 정보 */}
-      <VStack spacing={0} mt={12} width={'100%'} align={'stretch'}>
-        <CurrentStatus />
-      </VStack>
-
-      {/* 2. 미리보는 나의 변화 */}
-      <VStack spacing={0} mt={16} width={'100%'} align={'stretch'}>
-        <PredictedChanges />
-      </VStack>
-
-      {/* 3. 3개월 주기 나의 체형 */}
-      <VStack spacing={0} mt={16} width={'100%'} align={'stretch'}>
-        <BodyTypeTimeline />
-      </VStack>
-
-      {/* 하단 안내 문구 */}
-      <Text
-        textAlign={'center'}
-        color={'#888'}
-        fontSize={'sm'}
-        fontWeight={'medium'}
-        transition={'all 0.3s ease'}
-        mt={12}
-        _hover={{
-          color: '#FFF',
+    <section style={{ width: '100%', padding: 24 }}>
+      <h2 style={{ color: '#fff', fontSize: 28 }}>나의 체형</h2>
+      <div
+        style={{
+          color: '#FF6B6B',
+          fontWeight: 'bold',
+          fontSize: 20,
+          marginBottom: 8,
         }}
       >
-        슬라이더를 이동해서 실시간으로 체형 변화를 확인해보세요.
-      </Text>
-    </ContentsBox>
+        {LABELS[slider]}
+      </div>
+      <input
+        type="range"
+        min={0}
+        max={3}
+        value={slider}
+        step={1}
+        onChange={(e) => setSlider(Number(e.target.value))}
+        style={{ width: '100%', marginBottom: 12 }}
+      />
+      <BodyShapePreview
+        weight={w}
+        height={height}
+        muscle={m}
+        bodyFat={f}
+        goalType={goalType} // ✅ 추가
+        isCurrentState={slider === 0}
+      />
+    </section>
   );
-};
+}
 
 export default MyBodyContentsBox;

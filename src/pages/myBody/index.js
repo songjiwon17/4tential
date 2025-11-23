@@ -6,6 +6,8 @@ import MyBodyContentsBox from './MyBodyContentsBox';
 const MyBody = () => {
   return (
     <Flex direction={'column'} justifyContent={'center'} alignItems={'center'}>
+      <br />
+      <br />
       <MainTitle mainTitle={'나의 체형'} mt={10} />
       <SubText
         subText={
