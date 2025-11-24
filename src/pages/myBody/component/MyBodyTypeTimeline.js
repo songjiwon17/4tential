@@ -1,17 +1,10 @@
 import { Box, Text, Center } from '@chakra-ui/react';
+import MyBodyTitle from './MyBodyTitle';
 
-const BodyTypeTimeline = () => {
+const MyBodyTypeTimeline = () => {
   return (
     <>
-      <Text
-        color={'#FFF'}
-        fontSize={'lg'}
-        fontWeight={'semibold'}
-        mb={8}
-        width={'100%'}
-      >
-        3개월 주기 나의 체형
-      </Text>
+      <MyBodyTitle width={'100%'}>3개월 주기 나의 체형</MyBodyTitle>
 
       <Center
         bgGradient={'linear(to-br, #E5E5E5, #D0D0D0)'}
@@ -44,4 +37,4 @@ const BodyTypeTimeline = () => {
   );
 };
 
-export default BodyTypeTimeline;
+export default MyBodyTypeTimeline;

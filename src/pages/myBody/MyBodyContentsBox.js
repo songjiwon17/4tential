@@ -7,8 +7,8 @@ import {
   getBmiClass,
   getFatPercent,
   getBodyPrediction,
-} from './utils/bodyCalc';
-import BodyShapePreview from './component/BodyShapePreview';
+} from './utils/MyBodyCalc';
+import MyBodyShapePreview from './component/MyBodyShapePreview';
 
 const MONTHS = [0, 3, 6, 12];
 const LABELS = ['현재', '3개월 후', '6개월 후', '1년 후'];
@@ -67,7 +67,7 @@ function MyBodyContentsBox() {
         onChange={(e) => setSlider(Number(e.target.value))}
         style={{ width: '100%', marginBottom: 12 }}
       />
-      <BodyShapePreview
+      <MyBodyShapePreview
         weight={w}
         height={height}
         muscle={m}

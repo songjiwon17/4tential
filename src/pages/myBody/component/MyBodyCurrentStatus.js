@@ -1,8 +1,9 @@
 import { useAtomValue } from 'jotai';
 import { profileSavedAtom } from '../../../store/atoms/ProfileAtoms';
+import MyBodyTitle from './MyBodyTitle';
 import { Flex, Text } from '@chakra-ui/react';
 
-const CurrentStatus = () => {
+const MyBodyCurrentStatus = () => {
   const profileData = useAtomValue(profileSavedAtom);
 
   const stats = [
@@ -14,9 +15,7 @@ const CurrentStatus = () => {
 
   return (
     <>
-      <Text color={'#FFF'} fontSize={'lg'} fontWeight={'semibold'} mb={8}>
-        현재 상태
-      </Text>
+      <MyBodyTitle>현재 상태</MyBodyTitle>
 
       <Flex
         border={'1px solid'}
@@ -42,10 +41,10 @@ const CurrentStatus = () => {
               transform: 'scale(1.02)',
             }}
           >
-            <Text color={'#888'} fontSize={'xs'} mb={2} fontWeight={'medium'}>
+            <Text textStyle="grayText" mb={2}>
               {stat.label}
             </Text>
-            <Text color={'#FFF'} fontSize={'2xl'} fontWeight={'bold'}>
+            <Text textStyle="whiteText">
               {stat.value}
               {stat.unit}
             </Text>
@@ -56,4 +55,4 @@ const CurrentStatus = () => {
   );
 };
 
-export default CurrentStatus;
+export default MyBodyCurrentStatus;

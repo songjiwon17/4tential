@@ -32,6 +32,48 @@ const theme = extendTheme({
     },
   },
 
+  // ✅ textStyles를 최상위로 이동
+  textStyles: {
+    // 섹션 제목 스타일
+    sectionTitle: {
+      color: '#FFF',
+      fontSize: 'lg',
+      fontWeight: 'semibold',
+    },
+    // 타임라인 라벨
+    timelineLabel: {
+      color: '#FF6B6B',
+      fontSize: 'xl',
+      fontWeight: 'bold',
+      textAlign: 'center',
+    },
+    // 수치 값 (큰 숫자)
+    statValue: {
+      color: '#000',
+      fontSize: '3xl',
+      fontWeight: 'bold',
+      bgGradient: 'linear(to-r, #FF6B6B, #FF8E8E)',
+      bgClip: 'text',
+    },
+    // 수치 라벨 (작은 글씨)
+    statLabel: {
+      color: '#666',
+      fontSize: 'sm',
+      fontWeight: 'medium',
+    },
+    // 회색 텍스트
+    grayText: {
+      color: '#888',
+      fontSize: 'xs',
+    },
+    // 흰색 텍스트
+    whiteText: {
+      color: '#FFF',
+      fontSize: '2xl',
+      fontWeight: 'bold',
+    },
+  },
+
   components: {
     Text: {
       baseStyle: {
@@ -77,18 +119,12 @@ const theme = extendTheme({
     //   baseStyle: {
     //     fontWeight: 'normal',
     //     fontFamily: "'Inter', 'Noto Sans KR', sans-serif",
-    //     // bg: 'transparent',
-    //     // backgroundColor: 'none',
     //     borderRadius: 'none',
     //     _focus: { boxShadow: 'none' },
     //   },
     //   variants: {
     //     nav: (props) => ({
-    //       // color: props.isActive ? '#ffffff' : '#7D7D7D',
-    //       fontSize: ['18px', '20px', '22px', '24px'], // 반응형 (sm, md, lg, xl)
-    //       // borderBottom: props.isActive
-    //       //   ? '2px solid #ED64A6'
-    //       //   : '2px solid transparent',
+    //       fontSize: ['18px', '20px', '22px', '24px'],
     //       transition: 'all 0.3s ease-in-out',
     //     }),
     //   },

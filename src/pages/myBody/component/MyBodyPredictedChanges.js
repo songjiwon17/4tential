@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { useAtomValue } from 'jotai';
 import { profileSavedAtom } from '../../../store/atoms/ProfileAtoms';
-import BodyShapePreview from './BodyShapePreview';
-import { calculatePrediction } from '../utils/bodyCalc';
+import MyBodyShapePreview from './MyBodyShapePreview';
+import MyBodyTitle from './MyBodyTitle';
+import { getBodyPrediction } from '../utils/MyBodyCalc';
 import {
   Box,
   Flex,
@@ -13,11 +14,10 @@ import {
   SliderThumb,
 } from '@chakra-ui/react';
 
-const PredictedChanges = () => {
+const MyBodyPredictedChanges = () => {
   const profileData = useAtomValue(profileSavedAtom);
   const [timelineValue, setTimelineValue] = useState(0);
 
-  // 현재 값 (Jotai에서 가져오기)
   const currentData = {
     height: parseFloat(profileData.height) || 170,
     weight: parseFloat(profileData.weight) || 70,
@@ -25,29 +25,33 @@ const PredictedChanges = () => {
     bodyFat: parseFloat(profileData.bodyFat) || 20,
   };
 
-  // 타임라인 값에 따른 개월 수
   const getMonths = (value) => {
-    if (value <= 33) return (value * 3) / 33; // 0~3개월
-    if (value <= 66) return 3 + ((value - 33) * 3) / 33; // 3~6개월
-    return 6 + ((value - 66) * 6) / 34; // 6~12개월
+    if (value <= 33) return (value * 3) / 33;
+    if (value <= 66) return 3 + ((value - 33) * 3) / 33;
+    return 6 + ((value - 66) * 6) / 34;
   };
 
   const months = getMonths(timelineValue);
+  const mode = profileData.type || '다이어트';
 
-  // 운동 모드 (프로필 타입에 따라)
-  const mode = profileData.type === '다이어트';
+  const predicted = getBodyPrediction({
+    weight: currentData.weight,
+    height: currentData.height,
+    muscle: currentData.muscle,
+    bodyFat: currentData.bodyFat,
+    months: months,
+    goalType: mode,
+  });
 
-  // 예측값 계산
-  const predicted = calculatePrediction(currentData, months, mode);
-
-  // 현재 표시할 값
   const displayData = {
     weight: timelineValue === 0 ? currentData.weight : predicted.weight,
     muscle: timelineValue === 0 ? currentData.muscle : predicted.muscle,
     bodyFat: timelineValue === 0 ? currentData.bodyFat : predicted.bodyFat,
   };
 
-  // 타임라인 라벨
+  // ✅ 체지방률(%) 계산
+  const bodyFatPercent = (displayData.bodyFat / displayData.weight) * 100;
+
   const getTimeLabel = () => {
     if (timelineValue <= 5) return '현재';
     if (timelineValue <= 33) return `${Math.round(months)}개월 후`;
@@ -57,9 +61,7 @@ const PredictedChanges = () => {
 
   return (
     <>
-      <Text color={'#FFF'} fontSize={'lg'} fontWeight={'semibold'} mb={8}>
-        미리보는 나의 변화
-      </Text>
+      <MyBodyTitle>미리보는 나의 변화</MyBodyTitle>
 
       {/* 슬라이더 */}
       <Box px={4} mb={6} width={'100%'}>
@@ -105,25 +107,18 @@ const PredictedChanges = () => {
       </Box>
 
       {/* 현재 시점 표시 */}
-      <Text
-        color={'#FF6B6B'}
-        fontSize={'xl'}
-        fontWeight={'bold'}
-        textAlign={'center'}
-        mb={4}
-      >
+      <Text textStyle="timelineLabel" mb={4}>
         {getTimeLabel()}
       </Text>
 
-      {/* 3D 체형 프리뷰 */}
+      {/* 체형 프리뷰 */}
       <Box mb={8}>
-        // 변경
-        <BodyShapePreview
+        <MyBodyShapePreview
           weight={displayData.weight}
           height={currentData.height}
           muscle={displayData.muscle}
           bodyFat={displayData.bodyFat}
-          goalType={mode} // 추가 (mode는 이미 'diet' 또는 'bulk'로 설정됨)
+          goalType={mode}
           isCurrentState={timelineValue === 0}
         />
       </Box>
@@ -149,19 +144,10 @@ const PredictedChanges = () => {
             transform: 'translateY(-2px)',
           }}
         >
-          <Text
-            color={'#000'}
-            fontSize={'3xl'}
-            fontWeight={'bold'}
-            mb={1}
-            bgGradient={'linear(to-r, #FF6B6B, #FF8E8E)'}
-            bgClip={'text'}
-          >
+          <Text textStyle="statValue" mb={1}>
             {displayData.weight.toFixed(1)}kg
           </Text>
-          <Text color={'#666'} fontSize={'sm'} fontWeight={'medium'}>
-            체중
-          </Text>
+          <Text textStyle="statLabel">체중</Text>
         </Flex>
         <Flex
           direction={'column'}
@@ -174,19 +160,10 @@ const PredictedChanges = () => {
             transform: 'translateY(-2px)',
           }}
         >
-          <Text
-            color={'#000'}
-            fontSize={'3xl'}
-            fontWeight={'bold'}
-            mb={1}
-            bgGradient={'linear(to-r, #FF6B6B, #FF8E8E)'}
-            bgClip={'text'}
-          >
+          <Text textStyle="statValue" mb={1}>
             {displayData.muscle.toFixed(1)}kg
           </Text>
-          <Text color={'#666'} fontSize={'sm'} fontWeight={'medium'}>
-            근육량
-          </Text>
+          <Text textStyle="statLabel">근육량</Text>
         </Flex>
         <Flex
           direction={'column'}
@@ -199,23 +176,15 @@ const PredictedChanges = () => {
             transform: 'translateY(-2px)',
           }}
         >
-          <Text
-            color={'#000'}
-            fontSize={'3xl'}
-            fontWeight={'bold'}
-            mb={1}
-            bgGradient={'linear(to-r, #FF6B6B, #FF8E8E)'}
-            bgClip={'text'}
-          >
-            {displayData.bodyFat.toFixed(1)}%
+          <Text textStyle="statValue" mb={1}>
+            {/* ✅ 체지방률(%) 표시 */}
+            {bodyFatPercent.toFixed(1)}%
           </Text>
-          <Text color={'#666'} fontSize={'sm'} fontWeight={'medium'}>
-            체지방률
-          </Text>
+          <Text textStyle="statLabel">체지방률</Text>
         </Flex>
       </Flex>
     </>
   );
 };
 
-export default PredictedChanges;
+export default MyBodyPredictedChanges;
