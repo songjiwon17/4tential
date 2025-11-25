@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { foodData } from '../mock/mockFood';
 
 const useFood = () => {
   const [selectedFood, setSelectedFood] = useState('');
