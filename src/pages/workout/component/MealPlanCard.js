@@ -1,7 +1,7 @@
 import { HStack, VStack, Text } from '@chakra-ui/react';
 import Card from '../../../components/Card';
 
-const MealPlanCard = ({ mealPlan, userGoal, userName }) => {
+const MealPlanCard = ({ mealPlan }) => {
   return (
     <Card
       w="full"
@@ -29,12 +29,6 @@ const MealPlanCard = ({ mealPlan, userGoal, userName }) => {
               {mealPlan.title}
             </Text>
           </HStack>
-
-          {userName && userGoal && (
-            <Text fontSize="sm" color="#888">
-              {userName}님의 목표 ({userGoal})에 맞춘 식단입니다
-            </Text>
-          )}
 
           <VStack align="flex-start" spacing={2} w="full">
             <HStack>

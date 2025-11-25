@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Image, Text, VStack, Box } from '@chakra-ui/react';
+import { Image, Text, VStack, Box, Button } from '@chakra-ui/react';
 import Card from '../../../components/Card';
 import Badge from '../../../components/Badge';
 import TypeButton from '../../../components/TypeButton';
@@ -9,7 +9,6 @@ const WorkoutCard = ({ workout, isRecommended }) => {
   const [isFlipped, setIsFlipped] = useState(false);
 
   // 카드 클릭 시 뒤집기
-
   const handleFlip = () => {
     setIsFlipped(!isFlipped);
   };
@@ -122,7 +121,24 @@ const WorkoutCard = ({ workout, isRecommended }) => {
               <Text fontSize="2xl" fontWeight="bold" color="#fff">
                 {workout.title}
               </Text>
-
+              {/* YouTube 검색 버튼 */}
+              <Button
+                w="100%"
+                h="50%"
+                colorScheme="blue"
+                size="lg"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  window.open(
+                    `https://www.youtube.com/results?search_query=${encodeURIComponent(
+                      workout.title + ' tutorial'
+                    )}`,
+                    '_blank'
+                  );
+                }}
+              >
+                YouTube에서 동영상 보기
+              </Button>
               <Text fontSize="xs" color="#4A90E2" mt="auto" textAlign="center">
                 ← 클릭하여 돌아가기
               </Text>

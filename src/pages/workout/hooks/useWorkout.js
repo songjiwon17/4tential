@@ -5,7 +5,7 @@ import MuscleStrengthImage from '../../../assets/images/muscleStrengthTypeImageN
 import bodyshapeTypeImage from '../../../assets/images/bodyShapeTypeImageNew.png';
 
 // API 설정
-const API_KEY = '7YgpjvicYE1jZW73eCnv3Q==pE16rwA4B3IDCIKT';
+const API_KEY = 'kA0zqvU2nwNMF054JPr8FfB3qhkaYxC2WO4QPCYl';
 const API_BASE_URL = 'https://api.api-ninjas.com/v1/exercises';
 
 // 각 근육 부위별로 가져올 운동 리스트
@@ -61,7 +61,7 @@ const formatExercise = (exercise, id, muscle) => {
   // 근육 부위에 따라 타입 자동 지정
   const config = muscleConfig[muscle] || {
     image: dietTypeImage,
-    type: 'Diet',
+    type: '다이어트', // 영어에서 한글로 변경
   };
 
   // 난이도와 운동 타입에 따른 운동 정보 설정
@@ -69,7 +69,7 @@ const formatExercise = (exercise, id, muscle) => {
     const difficultyLevel = difficulty?.toLowerCase() || 'intermediate';
 
     switch (exerciseType) {
-      case 'Diet': // 다이어트 - 고강도, 짧은 휴식
+      case '다이어트': // 다이어트 - 고강도, 짧은 휴식
         return {
           time: difficultyLevel === 'beginner' ? '10~15분' : '15~20분',
           sets:
@@ -79,7 +79,7 @@ const formatExercise = (exercise, id, muscle) => {
           rest: '세트 간 30초',
         };
 
-      case 'BoostPhysical': // 체력향상 - 중강도, 지구력 중심
+      case '체력향상': // 체력향상 - 중강도, 지구력 중심
         return {
           time: '15~25분',
           sets:
@@ -89,7 +89,7 @@ const formatExercise = (exercise, id, muscle) => {
           rest: '세트 간 45~60초',
         };
 
-      case 'IncreasedStrength': // 근력향상 - 고중량, 긴 휴식
+      case '근력향상': // 근력향상 - 고중량, 긴 휴식
         return {
           time: '20~30분',
           sets:
@@ -99,7 +99,7 @@ const formatExercise = (exercise, id, muscle) => {
           rest: '세트 간 60~90초',
         };
 
-      case 'BodyShapeCorrection': // 체형교정 - 정확한 자세, 중간 강도
+      case '체형교정': // 체형교정 - 정확한 자세, 중간 강도
         return {
           time: '15~20분',
           sets:
@@ -125,10 +125,10 @@ const formatExercise = (exercise, id, muscle) => {
     if (!instructions) {
       // 타입별 기본 설명
       const typeDescriptions = {
-        Diet: '체지방 감량에 효과적인 유산소 운동.',
-        BoostPhysical: '심폐 지구력과 전반적인 체력을 향상.',
-        IncreasedStrength: '근육량 증가와 근력 향상에 최적화된 운동.',
-        BodyShapeCorrection: '자세 교정과 균형잡힌 신체 발달.',
+        다이어트: '체지방 감량에 효과적인 유산소 운동.',
+        체력향상: '심폐 지구력과 전반적인 체력을 향상.',
+        근력향상: '근육량 증가와 근력 향상에 최적화된 운동.',
+        체형교정: '자세 교정과 균형잡힌 신체 발달.',
       };
       return typeDescriptions[config.type] || '효과적인 운동입니다.';
     }
