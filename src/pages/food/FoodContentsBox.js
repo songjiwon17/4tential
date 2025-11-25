@@ -6,12 +6,12 @@ import useFood from './hooks/useFood';
 import { useFoodMessage } from '../../store/query/QueryPath';
 
 const FoodContentsBox = () => {
-  const { selectedFood, handleRecommend, handleSearch } = useFood();
+  const { selectedFood, handleClickRecommend, handleClickSearch } = useFood();
   const { data: nutrition, isLoading, error } = useFoodMessage(selectedFood);
   return (
     <>
       <Flex direction="column" w="100%">
-        <FoodInputBox onSearch={handleSearch} />
+        <FoodInputBox onSearch={handleClickSearch} />
         <Box mt="45px">
           <Line />
         </Box>
@@ -21,22 +21,22 @@ const FoodContentsBox = () => {
         <Flex mt={30} gap={3} justifyContent="flex-start">
           <FoodRecomendationBtn
             value={'카페라떼'}
-            onClick={handleRecommend}
+            onClick={handleClickRecommend}
             isSelected={selectedFood === '카페라떼'}
           />
           <FoodRecomendationBtn
             value={'햄버거'}
-            onClick={handleRecommend}
+            onClick={handleClickRecommend}
             isSelected={selectedFood === '햄버거'}
           />
           <FoodRecomendationBtn
             value={'고구마피자'}
-            onClick={handleRecommend}
+            onClick={handleClickRecommend}
             isSelected={selectedFood === '고구마피자'}
           />
           <FoodRecomendationBtn
             value={'돈가스'}
-            onClick={handleRecommend}
+            onClick={handleClickRecommend}
             isSelected={selectedFood === '돈가스'}
           />
         </Flex>
@@ -44,22 +44,22 @@ const FoodContentsBox = () => {
       <Flex mt={2} gap={3} justifyContent="flex-start">
         <FoodRecomendationBtn
           value={'냉면'}
-          onClick={handleRecommend}
+          onClick={handleClickRecommend}
           isSelected={selectedFood === '냉면'}
         />
         <FoodRecomendationBtn
           value={'알리오올리오'}
-          onClick={handleRecommend}
+          onClick={handleClickRecommend}
           isSelected={selectedFood === '알리오올리오'}
         />
         <FoodRecomendationBtn
           value={'팟타이'}
-          onClick={handleRecommend}
+          onClick={handleClickRecommend}
           isSelected={selectedFood === '팟타이'}
         />
         <FoodRecomendationBtn
           value={'돈코츠라멘'}
-          onClick={handleRecommend}
+          onClick={handleClickRecommend}
           isSelected={selectedFood === '돈코츠라멘'}
         />
       </Flex>
@@ -133,14 +133,6 @@ const FoodContentsBox = () => {
               </Text>
             </Box>
           </Flex>
-          {/*<Text mt={8} fontSize="sm" color="#000000" textAlign="center">*/}
-          {/*  {nutritions.description.split('\n').map((line, idx) => (*/}
-          {/*    <span key={idx}>*/}
-          {/*      {line}*/}
-          {/*      <br />*/}
-          {/*    </span>*/}
-          {/*  ))}*/}
-          {/*</Text>*/}
         </Box>
       )}
     </>
