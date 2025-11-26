@@ -5,13 +5,16 @@ import MainTitle from '../../components/MainTitle';
 import SubText from '../../components/SubText';
 
 const WorkoutTitle = () => {
+  // Atom에서 프로필 데이터 가져오기
   const profileSave = useAtomValue(profileSavedAtom);
+  // 프로필 저장 여부 확인 (이름이 있고 빈 문자열이 아닐 때)
   const hasProfile = profileSave?.name && profileSave.name.trim() !== '';
   const userName = profileSave.name;
 
   return (
     <VStack align="center" spacing={2} mb={6}>
       <MainTitle mainTitle="운동 추천" />
+      {/* 프로필 유무에 따라 "회원님" 또는 "{이름}님" */}
       <SubText
         subText={
           <>

@@ -17,9 +17,9 @@ const WorkoutCard = ({ workout, isRecommended }) => {
     <Box
       position="relative"
       w="100%"
-      h={['400px', '500px']}
-      style={{ perspective: '1000px' }}
-      onClick={handleFlip}
+      h={['400px', '500px']} // 반응형 높이
+      style={{ perspective: '1000px' }} // 3D 효과
+      onClick={handleFlip} // 클릭 시 플립
       cursor="pointer"
     >
       {/* 카드 컨테이너 */}
@@ -27,7 +27,7 @@ const WorkoutCard = ({ workout, isRecommended }) => {
         position="relative"
         w="100%"
         h="100%"
-        transition="transform 0.6s"
+        transition="transform 0.6s" // 0.6초 애니메이션
         style={{
           transformStyle: 'preserve-3d',
           transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)',
@@ -44,9 +44,11 @@ const WorkoutCard = ({ workout, isRecommended }) => {
           }}
         >
           <Card isHighlighted={isRecommended} position="relative" h="100%">
+            {/* 추천 배지 */}
             {isRecommended && <Badge>⭐ 추천</Badge>}
 
             <VStack align="flex-start" spacing={0} p={0} h="100%">
+              {/* 운동 이미지 */}
               <Image
                 src={workout.imageUrl}
                 alt={workout.title}
@@ -56,10 +58,12 @@ const WorkoutCard = ({ workout, isRecommended }) => {
               />
 
               <VStack align="flex-start" spacing={3} p={5} w="full" flex={1}>
+                {/* 타입 버튼 */}
                 <Box maxW="100%">
                   <TypeButton value={workout.type} isSelected={isRecommended} />
                 </Box>
 
+                {/* 운동 제목 */}
                 <Text
                   fontSize="lg"
                   fontWeight="bold"
@@ -69,6 +73,7 @@ const WorkoutCard = ({ workout, isRecommended }) => {
                   {workout.title}
                 </Text>
 
+                {/* 운동 정보 */}
                 <VStack
                   fontSize="sm"
                   color="#bbb"
@@ -128,7 +133,7 @@ const WorkoutCard = ({ workout, isRecommended }) => {
                 colorScheme="blue"
                 size="lg"
                 onClick={(e) => {
-                  e.stopPropagation();
+                  e.stopPropagation(); // 버튼 클릭 시 카드 플립 방지
                   window.open(
                     `https://www.youtube.com/results?search_query=${encodeURIComponent(
                       workout.title + ' tutorial'

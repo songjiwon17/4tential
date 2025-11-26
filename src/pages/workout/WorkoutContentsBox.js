@@ -10,23 +10,42 @@ import MealPlanCard from './component/MealPlanCard';
 import WorkoutList from './component/WorkoutList';
 import { mealPlansByType, mockMealPlan } from './mock/mockWorkouts';
 
+/**
+ * ============================================
+ * 운동 추천 페이지 - 메인 콘텐츠 박스
+ * ============================================
+ *
+ * 역할:
+ * 1. 운동 타입 버튼 표시 및 선택 관리
+ * 2. 선택된 타입에 맞는 추천 식단 표시
+ * 3. 필터링된 운동 목록 표시
+ *
+ * 데이터 흐름:
+ * profileSavedAtom → useWorkout Hook → WorkoutList
+ *
+ * 주요 로직:
+ * - 타입 버튼 배열: 프로필이 있으면 사용자 목표를 2번째에 배치
+ * - 식단 선택: 선택된 타입 또는 사용자 목표에 맞는 식단
+ * - 운동 필터링: useWorkout Hook에서 처리
+ */
 const WorkoutContentsBox = () => {
   const profileSave = useAtomValue(profileSavedAtom);
 
   // useWorkout hook에서 필요한 모든 데이터 가져오기
   const {
-    selectedType,
-    handleTypeClick,
-    isProfileSaved,
+    selectedType, // 현재 선택된 타입
+    handleTypeClick, // 타입 버튼 클릭 핸들러
+    isProfileSaved, // 프로필 저장 여부
     workouts, // API로부터 받은 운동 데이터
-    isLoading,
-    error,
+    isLoading, // 로딩 상태
+    error, // 에러 메시지
   } = useWorkout(profileSave);
 
   const hasProfile = isProfileSaved;
-  const userGoal = profileSave?.type;
+  const userGoal = profileSave?.type; // 사용자 운동 목표
   const userName = profileSave?.name;
 
+  //각 타입 버튼 배열(위는 프로필 있을 때(선택한 타입이 2번 자리), 아래는 없을 때)
   const workoutTypes = hasProfile
     ? [
         '전체',
@@ -47,12 +66,13 @@ const WorkoutContentsBox = () => {
     <ContentsBox>
       <Line />
 
+      {/* ===== 타입 버튼 영역 ===== */}
       <Flex mt={30} gap={6} alignSelf="center" flexWrap="wrap">
         {workoutTypes.map((type) => (
           <TypeButton
             key={type}
             value={type}
-            isSelected={selectedType === type}
+            isSelected={selectedType === type} // 선택된 버튼 강조
             onChange={handleTypeClick}
           />
         ))}
