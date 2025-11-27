@@ -158,7 +158,8 @@ const FoodContentsBox = () => {
               <Text variant="foodInfoNameText">탄수화물</Text>
             </Box>
           </Flex>
-          <FoodFeedback nutrition={nutrition} /> {/* 영양 정보에 따른 상태 메시지 출력. */}
+          <FoodFeedback nutrition={nutrition} />{' '}
+          {/* 영양 정보에 따른 상태 메시지 출력. */}
         </Flex>
       )}
     </>
