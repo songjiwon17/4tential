@@ -14,28 +14,27 @@ export const useMainMessage = () => {
 // 식단 정보 api 이용하여 식단 정보 가져오는 useFoodMessage
 export const useFoodMessage = (foodName) => {
   return useQuery({
-    queryKey: ['foodData', foodName],
+    queryKey: ['foodData', foodName], // 자동 감지, foodName이 변경되면 서버에 요청. 서버에서 데이터를 가져오면 캐시에 저장. 이전에 요청한 데이터를 다시 요청하면 캐시에서 데이터를 가져옴.
     queryFn: async () => {
       const res = await axios.get(
         `http://localhost:4000/api/food?foodName=${encodeURIComponent(
           foodName
-        )}`,
+        )}`, // 서버에 데이터 요청.
         {
-          timeout: 10000, // ★ 추가: 10초 지나면 요청 취소
+          timeout: 10000, // 10초 지나면 요청 취소.
         }
       );
       if (!res.data) {
-        return null;
+        return null; // 만약 데이터가 비어있으면 null 반환.
       }
       return {
-        name: res.data.FOOD_NM_KR,
-        kcal: res.data.AMT_NUM1,
-        protein: res.data.AMT_NUM3,
-        fat: res.data.AMT_NUM4,
-        carbs: res.data.AMT_NUM6,
-        size: res.data.SERVING_SIZE,
+        name: res.data.FOOD_NM_KR, // 음식명
+        kcal: res.data.AMT_NUM1, // 칼로리 (kcal)
+        protein: res.data.AMT_NUM3, // 단백질 (g)
+        fat: res.data.AMT_NUM4, // 지방 (g)
+        carbs: res.data.AMT_NUM6, // 탄수화물 (g)
       };
     },
-    enabled: !!foodName,
+    enabled: !!foodName, // 검색어가 지금 있는지 확인하는 코드. foodName이 있으면 true, 없으면 false.
   });
 };

@@ -99,6 +99,10 @@ const theme = extendTheme({
           fontSize: ['18px', '20px', '22px', '24px'],
           color: '#000000',
         },
+        foodInfoNameText: {
+          fontSize: ['10px', '12px', '14px', '16px'],
+          color: 'gray.500',
+        },
         loginInfonText: {
           fontSize: ['12px', '14px', '16px', '18px'],
           color: '#000000',
