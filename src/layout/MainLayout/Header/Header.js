@@ -41,7 +41,13 @@ const Header = () => {
   return (
     <Stack>
       <NaviBox bg={isScrolled ? 'rgba(5, 2, 2, 0.95)' : 'transparent'}>
-        <Text as={Link} to="/" fontWeight={'bold'} cursor={'pointer'}>
+        <Text
+          as={Link}
+          to="/"
+          fontWeight={'bold'}
+          fontSize={'22px'}
+          cursor={'pointer'}
+        >
           4TENTIAL
         </Text>
 
@@ -51,25 +57,17 @@ const Header = () => {
           root={MainRoutes.root}
         />
 
-        {isLogin ? (
-          <Text
-            color="#FFFFFF"
-            fontWeight={'bold'}
-            fontSize={['14px', '16px', '18px', '20px']}
-          >
-            {profile.name}님💪
-          </Text>
-        ) : (
-          <Button
-            as={Link}
-            to="/login"
-            variant="unstyled"
-            color={'#FFFFFF'}
-            fontSize={['14px', '16px', '18px', '20px']}
-          >
-            로그인
-          </Button>
-        )}
+        <Box display={{ base: 'none', md: 'block' }}>
+          {isLogin ? (
+            <Text variant="loginText" fontWeight={'bold'}>
+              {profile.name}님💪
+            </Text>
+          ) : (
+            <Button as={Link} to="/login" variant="unstyled">
+              <Text variant="loginText">로그인</Text>
+            </Button>
+          )}
+        </Box>
       </NaviBox>
     </Stack>
   );

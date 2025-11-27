@@ -3,8 +3,13 @@ import { InputBox, LoginBox, LoginBtn } from './component/LoginStyle';
 import { Box, Center, Text, Flex } from '@chakra-ui/react';
 
 const Login = () => {
-  const { loginInput, setLoginInput, handleChangeLogin, handleChangeMoveMain } =
-    useLogin();
+  const {
+    loginInput,
+    setLoginInput,
+    handleChangeLogin,
+    handleChangeMoveMain,
+    handleChangeKeyDown,
+  } = useLogin();
 
   return (
     <Center width={'100%'} h={'100%'} pt={'10px'} mb={'20px'}>
@@ -33,6 +38,7 @@ const Login = () => {
             onChange={(e) =>
               setLoginInput((prev) => ({ ...prev, id: e.target.value }))
             }
+            onKeyDown={handleChangeKeyDown}
             placeholder={'신체정보 등록에 사용할 아이디를 입력하세요.'}
           />
 
@@ -45,6 +51,7 @@ const Login = () => {
             onChange={(e) =>
               setLoginInput((prev) => ({ ...prev, password: e.target.value }))
             }
+            onKeyDown={handleChangeKeyDown}
             placeholder={'비밀번호를 입력하세요.'}
           />
 

@@ -103,6 +103,11 @@ const theme = extendTheme({
           fontSize: ['10px', '12px', '14px', '16px'],
           color: 'gray.500',
         },
+        loginText: {
+          color: '#FFFFFF',
+          fontSize: ['14px', '16px', '18px', '20px'],
+          display: { base: 'none', md: 'block' },
+        },
         loginInfonText: {
           fontSize: ['12px', '14px', '16px', '18px'],
           color: '#000000',
