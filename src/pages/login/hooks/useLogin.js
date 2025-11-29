@@ -38,11 +38,19 @@ const useLogin = () => {
     navigate('/');
   };
 
+  const handleChangeKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      handleChangeLogin(loginInput);
+    }
+  };
+
   return {
     loginInput,
     setLoginInput,
+
     handleChangeLogin,
     handleChangeMoveMain,
+    handleChangeKeyDown,
   };
 };
 export default useLogin;
