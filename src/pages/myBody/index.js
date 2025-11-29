@@ -1,13 +1,12 @@
+import MyBodyPageTitle from './MyBodyPageTitle';
 import MyBodyContentsBox from './MyBodyContentsBox';
-import MyBodyCurrentStatus from './component/MyBodyCurrentStatus';
-import MyBodyPredictedChanges from './component/MyBodyPredictedChanges';
-import MyBodyTypeTimeline from './component/MyBodyTypeTimeline';
 import { Box } from '@chakra-ui/react';
 
 const MyBody = () => {
   return (
-    <Box p={6}>
-      <MyBodyPredictedChanges />
+    <Box w="100%" maxW="1200px" mx="auto" p={6}>
+      <MyBodyPageTitle />
+      <MyBodyContentsBox />
     </Box>
   );
 };
