@@ -17,15 +17,15 @@ import {
 const MyBodyPredictedChanges = () => {
   const profileData = useAtomValue(profileSavedAtom);
   const [timelineValue, setTimelineValue] = useState(0);
-  const [displayData, setDisplayData] = useState(null); // ✅ displayData를 state로
+  const [displayData, setDisplayData] = useState(null);
   const [error, setError] = useState(null);
 
-  const currentData = {
-    height: parseFloat(profileData.height) || 170,
-    weight: parseFloat(profileData.weight) || 70,
-    muscle: parseFloat(profileData.muscle) || 25,
-    bodyFat: parseFloat(profileData.bodyFat) || 20,
-  };
+  // ✅ 개별 값으로 추출
+  const height = parseFloat(profileData.height) || 170;
+  const weight = parseFloat(profileData.weight) || 70;
+  const muscle = parseFloat(profileData.muscle) || 25;
+  const bodyFat = parseFloat(profileData.bodyFat) || 20;
+  const mode = profileData.type || '다이어트';
 
   const getMonths = (value) => {
     if (value <= 33) return (value * 3) / 33;
@@ -33,15 +33,13 @@ const MyBodyPredictedChanges = () => {
     return 6 + ((value - 66) * 6) / 34;
   };
 
-  const mode = profileData.type || '다이어트';
-
-  // ✅ useEffect로 예측 계산
+  // ✅ useEffect 수정
   useEffect(() => {
     if (timelineValue === 0) {
       setDisplayData({
-        weight: currentData.weight,
-        muscle: currentData.muscle,
-        bodyFat: currentData.bodyFat,
+        weight: weight,
+        muscle: muscle,
+        bodyFat: bodyFat,
       });
       setError(null);
       return;
@@ -50,34 +48,29 @@ const MyBodyPredictedChanges = () => {
     try {
       const months = getMonths(timelineValue);
       const predicted = getBodyPrediction({
-        weight: currentData.weight,
-        height: currentData.height,
-        muscle: currentData.muscle,
-        bodyFat: currentData.bodyFat,
+        weight: weight,
+        height: height,
+        muscle: muscle,
+        bodyFat: bodyFat,
         months: months,
         goalType: mode,
       });
+
+      console.log(`${months}개월 예측:`, predicted); // ✅ 디버깅용
+
       setDisplayData(predicted);
       setError(null);
     } catch (err) {
       console.error('체형 예측 에러:', err.message);
       setError(err.message);
       setDisplayData({
-        weight: currentData.weight,
-        muscle: currentData.muscle,
-        bodyFat: currentData.bodyFat,
+        weight: weight,
+        muscle: muscle,
+        bodyFat: bodyFat,
       });
     }
-  }, [
-    timelineValue,
-    currentData.weight,
-    currentData.height,
-    currentData.muscle,
-    currentData.bodyFat,
-    mode,
-  ]);
+  }, [timelineValue, weight, height, muscle, bodyFat, mode]); // ✅ 개별 값으로 dependency
 
-  // ✅ displayData가 없으면 로딩
   if (!displayData) {
     return <Box p={6}>로딩 중...</Box>;
   }
@@ -92,19 +85,16 @@ const MyBodyPredictedChanges = () => {
     return `${Math.round(months)}개월 후`;
   };
 
-  const isValidInput =
-    currentData.muscle + currentData.bodyFat <= currentData.weight * 0.95;
+  const isValidInput = muscle + bodyFat <= weight * 0.95;
 
   return (
     <>
-      {/* 입력값 오류 경고 */}
       {!isValidInput && (
         <Box p={4} bg="red.500" borderRadius="md" color="white" mb={4}>
           ⚠️ 입력된 체성분 정보가 올바르지 않습니다. 프로필을 다시 확인해주세요.
         </Box>
       )}
 
-      {/* 예측 에러 경고 */}
       {error && timelineValue > 0 && (
         <Box p={4} bg="orange.500" borderRadius="md" color="white" mb={4}>
           ⚠️ 체형 예측을 계산할 수 없습니다: {error}
@@ -113,7 +103,6 @@ const MyBodyPredictedChanges = () => {
 
       <MyBodyTitle>미리보는 나의 변화</MyBodyTitle>
 
-      {/* 슬라이더 */}
       <Box px={4} mb={6} width={'100%'}>
         <Slider
           value={timelineValue}
@@ -157,16 +146,14 @@ const MyBodyPredictedChanges = () => {
         </Flex>
       </Box>
 
-      {/* 현재 시점 표시 */}
       <Text textStyle="timelineLabel" mb={4}>
         {error ? '현재' : getTimeLabel()}
       </Text>
 
-      {/* 체형 프리뷰 */}
       <Box mb={8}>
         <MyBodyShapePreview
           weight={displayData.weight}
-          height={currentData.height}
+          height={height}
           muscle={displayData.muscle}
           bodyFat={displayData.bodyFat}
           goalType={mode}

@@ -12,10 +12,10 @@ const MyBodyContentsBox = () => {
       <CurrentStatusCard
         userName={profileData.name || '사용자'}
         goalType={profileData.type || '다이어트'}
-        height={parseFloat(profileData.height) || 170}
-        weight={parseFloat(profileData.weight) || 70}
-        muscle={parseFloat(profileData.muscle) || 25}
-        bodyFat={parseFloat(profileData.bodyFat) || 20}
+        height={parseFloat(profileData.height) || 158}
+        weight={parseFloat(profileData.weight) || 60}
+        muscle={parseFloat(profileData.muscle) || 21}
+        bodyFat={parseFloat(profileData.bodyFat) || 28}
       />
 
       {/* 예측 변화 섹션 */}
