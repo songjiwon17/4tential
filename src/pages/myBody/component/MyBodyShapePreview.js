@@ -9,11 +9,12 @@ import bmi4 from '../../../assets/images/bmi4.png'; // 과체중
 import bmi5 from '../../../assets/images/bmi5.png'; // 비만
 import bmi6 from '../../../assets/images/bmi6.png'; // 고도비만
 
-// 근육 이미지 (근력향상용) - 5단계
+// 근육 이미지 (근력향상용)
 import muscle0_1 from '../../../assets/images/muscle0-1.png'; // 1단계: 일반 체형 (시작)
 import muscle2 from '../../../assets/images/muscle2.png'; // 2단계: 약간의 근육
-import muscle1_1 from '../../../assets/images/muscle1-1.png'; // 3단계: 탄탄한 체형
+import muscle1_1 from '../../../assets/images/muscle1-8.png'; // 3단계: 탄탄한 체형
 import muscle1_2 from '../../../assets/images/muscle1-2.png'; // 4단계: 복근 보이는
+import muscle1_3 from '../../../assets/images/muscle1-3.png'; // ✅ 추가: 과체중 근력향상용
 import muscle0 from '../../../assets/images/muscle0.png'; // 5단계: 근육질 (최종)
 
 const MyBodyShapePreview = ({
@@ -23,11 +24,15 @@ const MyBodyShapePreview = ({
   bodyFat = 20,
   goalType = '다이어트',
   isCurrentState = false,
+  initialBmi = null, // ✅ 추가: 초기 BMI (비만/고도비만 판단용)
 }) => {
   const bmi = getBmi(weight, height);
   const bmiClass = getBmiClass(bmi);
   const fatPercent = (bodyFat / weight) * 100;
   const muscleRatio = (muscle / weight) * 100;
+
+  // 초기 BMI가 전달되지 않으면 현재 BMI 사용
+  const startBmi = initialBmi || bmi;
 
   // ✅ BMI 기반 이미지 선택 (다이어트용)
   const getBmiImage = () => {
@@ -39,51 +44,43 @@ const MyBodyShapePreview = ({
     return bmi6; // 고도비만
   };
 
-  // ✅ 수정: 근력향상 - BMI 30 이상도 개선 시 muscle 이미지 사용 가능
+  // ✅ 수정: 근력향상 이미지 선택
   const getMuscleImage = () => {
     // 저체중은 BMI 이미지
     if (bmi < 18.5) {
       return getBmiImage();
     }
 
-    // ✅ 수정: 초고도비만 (BMI 35+)만 BMI 이미지로 제한
-    if (bmi >= 35) {
-      return getBmiImage();
-    }
-
-    // ✅ 수정: 체지방률 38% 초과 시에만 BMI 이미지 (기존 30% → 38%)
-    if (fatPercent > 38) {
-      return getBmiImage();
-    }
-
-    // ✅ 수정: 고도비만 (BMI 30~35) 전용 로직
-    if (bmi >= 30 && bmi < 35) {
-      // 개선 지표: 근육비율 37%+ 또는 체지방률 32% 이하
-      if (muscleRatio >= 37 || fatPercent <= 32) {
-        // 3단계: 근육비율 40%+, 체지방률 28% 이하
-        if (muscleRatio >= 40 && fatPercent <= 28) {
-          return muscle1_1;
-        }
-        // 2단계: 근육비율 37%+, 체지방률 32% 이하
-        if (muscleRatio >= 37 && fatPercent <= 32) {
-          return muscle2;
-        }
-        // 1단계: 개선 시작
-        return muscle0_1;
-      }
-      // 아직 개선이 미미하면 BMI 이미지
-      return getBmiImage();
-    }
-
-    // ✅ 비만 (BMI 25~30): 체지방률 조건 완화
-    if (bmi >= 25 && bmi < 30) {
-      // 체지방률 35% 초과 시 BMI 이미지 (기존 30% → 35%)
-      if (fatPercent > 35) {
-        return getBmiImage();
+    // =============================================
+    // ✅ 케이스 1: 초기 상태가 비만/고도비만 (BMI 25+)
+    // → 과체중(BMI 25 미만)이 될 때까지 다이어트 로직
+    // → 과체중 이하가 되면 muscle1-3 사용
+    // =============================================
+    // 비만(BMI 25~30)에서도 개선 지표 충족 시 muscle1-3 적용
+    if (startBmi >= 25 && startBmi < 30) {
+      // 근육비율 40%+ 또는 체지방률 25% 이하면 muscle1-3
+      if (muscleRatio >= 40 || fatPercent <= 25) {
+        return muscle1_3;
       }
     }
 
-    // ✅ 정상~과체중 구간 (BMI 18.5~30): 5단계 muscle 이미지
+    // =============================================
+    // ✅ 케이스 2: 초기 상태가 과체중 (BMI 23~25)
+    // → 근력이 증가하면 muscle1-3 사용
+    // =============================================
+    if (startBmi >= 23 && startBmi < 25) {
+      // 근육비율 36% 이상이면 근력 증가로 판단
+      if (muscleRatio >= 36) {
+        return muscle1_3;
+      }
+      // 아직 근력 증가 전이면 BMI 이미지
+      return getBmiImage();
+    }
+
+    // =============================================
+    // ✅ 케이스 3: 초기 상태가 정상 체중 (BMI 18.5~23)
+    // → 기존 5단계 muscle 이미지 로직
+    // =============================================
     // 5단계 (최종): 근육비율 43%+, 체지방률 22% 이하
     if (muscleRatio >= 43 && fatPercent <= 22) {
       return muscle0;
@@ -106,9 +103,8 @@ const MyBodyShapePreview = ({
 
   // ✅ 체력향상/체형교정: 상황에 따라
   const getCardioImage = () => {
-    // 정상~비만 BMI에서 운동 효과가 있으면 muscle
-    if (bmi >= 18.5 && bmi < 32) {
-      // 체지방률이 낮거나 근육비율이 높으면 muscle
+    // 정상~과체중 BMI에서 운동 효과가 있으면 muscle
+    if (bmi >= 18.5 && bmi < 25) {
       if (fatPercent <= 28 || muscleRatio >= 37) {
         return getMuscleImage();
       }
@@ -139,7 +135,7 @@ const MyBodyShapePreview = ({
     }
   };
 
-  // ✅ 라벨 생성 (5단계로 세분화)
+  // ✅ 라벨 생성
   const getBodyLabel = () => {
     if (isCurrentState) {
       return bmiClass;
@@ -149,19 +145,22 @@ const MyBodyShapePreview = ({
 
     // muscle 이미지 라벨
     if (image === muscle0) {
-      return goalType === '근력향상' ? '근육질 체형' : '탄탄한 체형';
+      return '근육질 체형';
     }
     if (image === muscle1_2) {
-      return goalType === '근력향상' ? '탄탄한 근육형' : '건강한 체형';
+      return '탄탄한 근육형';
     }
     if (image === muscle1_1) {
-      return goalType === '근력향상' ? '운동 적응형' : '균형잡힌 체형';
+      return '운동 적응형';
+    }
+    if (image === muscle1_3) {
+      return '체중감량 근력형'; // ✅ 추가: muscle1-3 라벨
     }
     if (image === muscle2) {
-      return goalType === '근력향상' ? '초기 발달형' : '활동적 체형';
+      return '초기 발달형';
     }
     if (image === muscle0_1) {
-      return goalType === '근력향상' ? '운동 시작형' : '일반 체형';
+      return '운동 시작형';
     }
 
     // BMI 이미지는 BMI 등급 그대로
@@ -240,7 +239,7 @@ const MyBodyShapePreview = ({
         </Badge>
       </Flex>
 
-      {/* 수치 정보 - 근육비율 추가 */}
+      {/* 수치 정보 */}
       <Flex
         justify="space-around"
         mb={4}
