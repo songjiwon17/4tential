@@ -4,6 +4,8 @@ import Card from '../../../components/Card';
 import Badge from '../../../components/Badge';
 import TypeButton from '../../../components/TypeButton';
 
+import YoutubeIcon from '../../../assets/images/icons/youtube-svg.svg';
+
 const WorkoutCard = ({ workout, isRecommended }) => {
   // 카드 뒤집기 상태 관리
   const [isFlipped, setIsFlipped] = useState(false);
@@ -85,9 +87,6 @@ const WorkoutCard = ({ workout, isRecommended }) => {
                   <Text>시간: {workout.time}</Text>
                   <Text>세트: {workout.sets}</Text>
                   {workout.rest && <Text>휴식: {workout.rest}</Text>}
-                  <Text mt={2} color="#888" fontSize="xs" noOfLines={3}>
-                    {workout.description}
-                  </Text>
                 </VStack>
 
                 <Text
@@ -130,7 +129,7 @@ const WorkoutCard = ({ workout, isRecommended }) => {
               <Button
                 w="100%"
                 h="50%"
-                colorScheme="blue"
+                colorScheme="teal"
                 size="lg"
                 onClick={(e) => {
                   e.stopPropagation(); // 버튼 클릭 시 카드 플립 방지
@@ -142,7 +141,14 @@ const WorkoutCard = ({ workout, isRecommended }) => {
                   );
                 }}
               >
-                YouTube에서 동영상 보기
+                <VStack>
+                  <Image
+                    src={YoutubeIcon}
+                    alt="YouTube 아이콘"
+                    boxSize="60px"
+                  />
+                  <Text fontWeight="bold">YouTube에서 동영상 보기</Text>
+                </VStack>
               </Button>
               <Text fontSize="xs" color="#4A90E2" mt="auto" textAlign="center">
                 ← 클릭하여 돌아가기
