@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { useAtomValue } from 'jotai';
 import { profileSavedAtom } from '../../../store/atoms/ProfileAtoms';
 import MyBodyShapePreview from './MyBodyShapePreview';
-import MyBodyTitle from './MyBodyTitle';
 import { getBodyPrediction, getFatPercent } from '../utils/MyBodyCalc';
 import {
   Box,
@@ -21,10 +20,10 @@ const MyBodyPredictedChanges = () => {
   const [error, setError] = useState(null);
 
   // ✅ 개별 값으로 추출
-  const height = parseFloat(profileData.height) || 170;
-  const weight = parseFloat(profileData.weight) || 70;
-  const muscle = parseFloat(profileData.muscle) || 25;
-  const bodyFat = parseFloat(profileData.bodyFat) || 20;
+  const height = parseFloat(profileData.height) || 158;
+  const weight = parseFloat(profileData.weight) || 60;
+  const muscle = parseFloat(profileData.muscle) || 21;
+  const bodyFat = parseFloat(profileData.bodyFat) || 28;
   const mode = profileData.type || '다이어트';
 
   const getMonths = (value) => {
@@ -56,7 +55,7 @@ const MyBodyPredictedChanges = () => {
         goalType: mode,
       });
 
-      console.log(`${months}개월 예측:`, predicted); // ✅ 디버깅용
+      console.log(`${months}개월 예측:`, predicted);
 
       setDisplayData(predicted);
       setError(null);
@@ -69,7 +68,7 @@ const MyBodyPredictedChanges = () => {
         bodyFat: bodyFat,
       });
     }
-  }, [timelineValue, weight, height, muscle, bodyFat, mode]); // ✅ 개별 값으로 dependency
+  }, [timelineValue, weight, height, muscle, bodyFat, mode]);
 
   if (!displayData) {
     return <Box p={6}>로딩 중...</Box>;
@@ -101,7 +100,10 @@ const MyBodyPredictedChanges = () => {
         </Box>
       )}
 
-      <MyBodyTitle>미리보는 나의 변화</MyBodyTitle>
+      {/* ✅ MyBodyTitle 대신 Text 직접 사용 */}
+      <Text textStyle="sectionTitle" mb={8}>
+        미리보는 나의 변화
+      </Text>
 
       <Box px={4} mb={6} width={'100%'}>
         <Slider
