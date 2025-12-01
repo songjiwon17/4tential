@@ -22,7 +22,7 @@ export const profileDetailKey = {
   weight: '체중',
   height: '키',
   muscle: '근육량',
-  bodyFat: '체지방량',
+  bodyFat: '체지방률',
 };
 
 export const profileDetailKeyAtom = atom({

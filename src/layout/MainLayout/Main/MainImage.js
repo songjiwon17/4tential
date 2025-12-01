@@ -40,12 +40,17 @@ const MainImage = ({ message }) => {
       {message && (
         <Text
           variant="mainMessageText"
-          maxW="750px"
+          width="100%"
+          maxW="800px"
           mx="auto"
+          textAlign="center"
+          wordBreak="keep-all"
+          whiteSpace="pre-wrap"
           position="absolute"
           top="50%"
           left="50%"
           transform="translate(-50%, -50%)"
+          textShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
           zIndex={100}
         >
           {message}

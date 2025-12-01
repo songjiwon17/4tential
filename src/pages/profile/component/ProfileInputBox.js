@@ -16,10 +16,10 @@ const InputBox = chakra(Input, {
 });
 
 const placeholderProfileEx = {
-  weight: '50kg',
-  height: '158cm',
-  muscle: '21kg',
-  bodyFat: '28%',
+  weight: '95kg',
+  height: '175cm',
+  muscle: '32kg',
+  bodyFat: '30%',
 };
 
 const numberProfileDetailKeyList = [

@@ -1,13 +1,27 @@
 import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
 
+import mockMotivateMessages from '../../layout/MainLayout/Main/mocks/mockMotivateMessages';
+
 // 명언 api 이용하여 명언 가져오는 useMainMessage
+// export const useMainMessage = () => {
+//   return useQuery(['mainMessage'], async () => {
+//     const res = await axios.get(
+//       'https://korean-advice-open-api.vercel.app/api/advice'
+//     );
+//     return res.data.message;
+//   });
+// };
+
+// 시연 영상 위한 명언 mockMotivateMessages
 export const useMainMessage = () => {
-  return useQuery(['mainMessage'], async () => {
-    const res = await axios.get(
-      'https://korean-advice-open-api.vercel.app/api/advice'
+  return useQuery(['mainMessage'], () => {
+    const randomMessageIndex = Math.floor(
+      Math.random() * mockMotivateMessages.length
     );
-    return res.data.message;
+    const randomMessageData = mockMotivateMessages[randomMessageIndex];
+
+    return randomMessageData.message;
   });
 };
 
