@@ -1,4 +1,4 @@
-import { Text, Box, chakra, Image } from '@chakra-ui/react';
+import { Text, Box, chakra, Image, Flex } from '@chakra-ui/react';
 import mainImage from '../../../assets/images/mainImage.png';
 
 // 메인 이미지 위에 올라는 검정 반투명 박스
@@ -52,6 +52,8 @@ const MainImage = ({ message }) => {
           transform="translate(-50%, -50%)"
           textShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
           zIndex={100}
+          lineHeight={{ base: '1.6', md: '1.5' }}
+          top={{ base: '70%', md: '50%' }}
         >
           {message}
         </Text>
