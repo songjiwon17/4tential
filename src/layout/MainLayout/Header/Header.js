@@ -23,6 +23,13 @@ const NaviBox = chakra(Box, {
   },
 });
 
+/**
+ * [공용 컴포넌트] 헤더 (Header)
+ * - 애플리케이션 최상단에 고정된 네비게이션 바
+ * - 스크롤 위치를 감지하여 배경색을 투명하거나 어둡게 변경하는 인터랙션이 포함
+ * - 로고, 메뉴 바(NaviBar), 로그인 영역으로 구성
+ */
+
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
 

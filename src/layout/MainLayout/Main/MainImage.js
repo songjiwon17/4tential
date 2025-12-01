@@ -1,4 +1,4 @@
-import { Text, Box, chakra, Image, Flex } from '@chakra-ui/react';
+import { Text, Box, chakra, Image } from '@chakra-ui/react';
 import mainImage from '../../../assets/images/mainImage.png';
 
 // 메인 이미지 위에 올라는 검정 반투명 박스
@@ -13,6 +13,13 @@ const ImageBlackBox = chakra(Box, {
     zIndex: '1',
   },
 });
+
+/**
+ * [메인 컴포넌트] 메인 배너 이미지 (MainImage)
+ * - 접속 시 가장 먼저 보이는 이미지 배너 컴포넌트
+ * - 배경 이미지 위에 반투명 검정 박스(ImageBlackBox)를 씌워 텍스트 가독성을 높임
+ * - 전달받은 명언(message)을 화면 중앙(PC) 또는 하단(모바일)에 반응형으로 배치하여 보여줌
+ */
 
 const MainImage = ({ message }) => {
   return (
@@ -43,17 +50,16 @@ const MainImage = ({ message }) => {
           width="100%"
           maxW="800px"
           mx="auto"
+          position="absolute"
+          top={{ base: '70%', md: '50%' }}
+          left="50%"
           textAlign="center"
           wordBreak="keep-all"
           whiteSpace="pre-wrap"
-          position="absolute"
-          top="50%"
-          left="50%"
+          lineHeight={{ base: '1.6', md: '1.5' }}
           transform="translate(-50%, -50%)"
           textShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
           zIndex={100}
-          lineHeight={{ base: '1.6', md: '1.5' }}
-          top={{ base: '70%', md: '50%' }}
         >
           {message}
         </Text>

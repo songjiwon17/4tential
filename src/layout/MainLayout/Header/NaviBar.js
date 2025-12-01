@@ -25,15 +25,24 @@ const menus = [
   { title: '식단 검색', path: '/food' },
 ];
 
+/**
+ * [공용 컴포넌트] 네비게이션 바 (NaviBar)
+ * - PC와 모바일 환경에 모두 대응하는 반응형 메뉴 컴포넌트
+ * - PC에서는 상단 메뉴바로, 모바일에서는 햄버거 버튼과 드로어(Drawer) 메뉴로 변환
+ * - 현재 경로(Location)를 감지하여 활성화된 메뉴를 강조하고, Jotai 상태를 통해 로그인 정보를 표시
+ */
+
 const NaviBar = () => {
   const location = useLocation();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
+  // Jotai의 Atom을 으로 전역 상태(로그인 여부, 사용자 프로필 정보)를 실시간 가져옴
   const isLogin = useAtomValue(isLoginAtom);
   const profile = useAtomValue(profileSavedAtom);
 
   return (
     <>
+      {/* PC 메뉴 */}
       <Flex
         alignItems={'center'}
         gap={10}

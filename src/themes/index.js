@@ -1,5 +1,12 @@
 import { extendTheme } from '@chakra-ui/react';
 
+/**
+ * [디자인 시스템] 커스텀 테마 설정
+ * - Chakra UI의 기본 테마를 확장(extendTheme)하여 프로젝트 고유의 디자인 시스템을 정의
+ * - 반응형 브레이크포인트(sm, md, lg, xl), 전역 스타일(Global Styles), 공통 텍스트 스타일 등을 통합 관리
+ * - 컴포넌트(Text, Container)의 기본 스타일과 변형(Variants)을 미리 정의하여 개발 생산성과 디자인 일관성을 높임
+ */
+
 const theme = extendTheme({
   breakpoints: {
     sm: '480px', // 모바일
@@ -32,7 +39,7 @@ const theme = extendTheme({
     },
   },
 
-  // ✅ textStyles를 최상위로 이동
+  // textStyles를 최상위로 이동
   textStyles: {
     // 섹션 제목 스타일
     sectionTitle: {
@@ -123,21 +130,6 @@ const theme = extendTheme({
         px: 4,
       },
     },
-
-    // Button: {
-    //   baseStyle: {
-    //     fontWeight: 'normal',
-    //     fontFamily: "'Inter', 'Noto Sans KR', sans-serif",
-    //     borderRadius: 'none',
-    //     _focus: { boxShadow: 'none' },
-    //   },
-    //   variants: {
-    //     nav: (props) => ({
-    //       fontSize: ['18px', '20px', '22px', '24px'],
-    //       transition: 'all 0.3s ease-in-out',
-    //     }),
-    //   },
-    // },
   },
 });
 

@@ -9,6 +9,11 @@ const FooterBox = chakra(Box, {
   },
 });
 
+/**
+ * [공용 컴포넌트] 푸터 (Footer)
+ * - 웹 페이지의 최하단에 위치하여 저작권(Copyright) 정보를 표시
+ */
+
 const Footer = () => {
   return (
     <FooterBox>

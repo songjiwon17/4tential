@@ -3,7 +3,15 @@ import { useQuery } from '@tanstack/react-query';
 
 import mockMotivateMessages from '../../layout/MainLayout/Main/mocks/mockMotivateMessages';
 
+/**
+ * [React Query] 서버 데이터 관리 훅 (Query Hooks)
+ * - 외부 API나 비동기 데이터를 가져오는 로직을 커스텀 훅으로 분리하여 관리
+ * - TanStack Query(React Query)를 사용하여 데이터 캐싱, 로딩 상태, 에러 처리를 효율적으로 수행
+ */
+
 // 명언 api 이용하여 명언 가져오는 useMainMessage
+// 시연 영상 촬영을 위해 현재는 주석 처리하고 Mock 데이터를 사용 중
+
 // export const useMainMessage = () => {
 //   return useQuery(['mainMessage'], async () => {
 //     const res = await axios.get(

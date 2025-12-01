@@ -1,5 +1,9 @@
 import { Box, chakra } from '@chakra-ui/react';
-
+/**
+ * [공용 컴포넌트] 콘텐츠 컨테이너 박스
+ * - 프로젝트 전반에서 사용되는 기본 레이아웃 박스
+ * - 반응형 사이즈와 검정색 배경 스타일 적용
+ */
 const ContentBox = chakra(Box, {
   baseStyle: {
     width: ['90%', '80%', '80%', '954px'],

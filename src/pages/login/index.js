@@ -2,6 +2,14 @@ import useLogin from './hooks/useLogin';
 import { InputBox, LoginBox, LoginBtn } from './component/LoginStyle';
 import { Box, Center, Text, Flex } from '@chakra-ui/react';
 
+/**
+ * ============================================
+ * 로그인 페이지
+ * ============================================
+ * - 사용자 인증을 위한 로그인 화면
+ * - 아이디/비밀번호 입력 폼과 로그인/비회원 이용 버튼으로 구성
+ * - useLogin 커스텀 훅을 사용하여 입력 상태와 로그인 로직을 분리하여 관리
+ */
 const Login = () => {
   const {
     loginInput,

@@ -1,5 +1,10 @@
 import { Box, chakra } from '@chakra-ui/react';
-
+/**
+ * [공용 컴포넌트] 카드
+ * - 운동 목록이나 정보를 담는 컨테이너 역할
+ * - 마우스를 올렸을 때(Hover) 살짝 떠오르는 애니메이션과 그림자 효과가 적용
+ * - isHighlighted prop이 true일 경우, 테두리와 그림자 색상을 변경하여 강조 표시
+ */
 const StyledCard = chakra(Box, {
   baseStyle: {
     width: 'full',

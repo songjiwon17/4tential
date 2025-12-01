@@ -29,6 +29,12 @@ const numberProfileDetailKeyList = [
   profileDetailKey.bodyFat,
 ];
 
+/**
+ *   프로필 입력 필드 (ProfileInputBox)
+ * - 개별 프로필 항목을 입력받는 재사용 가능한 컴포넌트
+ * - 항목의 타입(숫자형/문자형)을 판별하여 숫자 필드에는 정규식 유효성 검사를 적용
+ */
+
 const ProfileInputBox = ({ detailKey, value, onChange }) => {
   const isNumber = numberProfileDetailKeyList.includes(
     profileDetailKey[detailKey]

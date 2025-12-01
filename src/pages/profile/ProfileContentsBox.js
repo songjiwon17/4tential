@@ -12,7 +12,16 @@ import {
 } from '../../store/atoms';
 import { Flex, HStack, Text, VStack } from '@chakra-ui/react';
 
+/**
+ * ============================================
+ * 프로필 페이지 - 메인 콘텐츠 박스
+ * ============================================
+ * - 사용자로부터 운동 목적과 상세 신체 정보(이름, 키, 몸무게 등)를 입력받는 컴포넌트
+ * - 운동 목적 선택 버튼들과 신체 정보 입력 필드들을 포함하며, 입력된 데이터를 관리하고 저장하는 역할을 수행
+ */
+
 const ProfileContentsBox = ({ onSave }) => {
+  // 프로필 관련 비즈니스 로직(상태 관리, 핸들러)을 커스텀 훅에서 가져옴
   const { profileSave, handleChangeProfileType, handleChangeDetails } =
     useProfile();
 
