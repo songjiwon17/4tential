@@ -5,7 +5,9 @@ import MyBodyPredictedChanges from './component/MyBodyPredictedChanges';
 
 const MyBodyContentsBox = () => {
   const profileData = useAtomValue(profileSavedAtom);
-
+  const weight = parseFloat(profileData.weight) || 60;
+  const bodyFatPercent = parseFloat(profileData.bodyFat) || 25;
+  const bodyFatMass = weight * (bodyFatPercent / 100); // ✅ 변환
   return (
     <>
       {/* 현재 상태 섹션 */}
@@ -15,7 +17,7 @@ const MyBodyContentsBox = () => {
         height={parseFloat(profileData.height) || 158}
         weight={parseFloat(profileData.weight) || 60}
         muscle={parseFloat(profileData.muscle) || 21}
-        bodyFat={parseFloat(profileData.bodyFat) || 28}
+        bodyFat={bodyFatMass}
       />
 
       {/* 예측 변화 섹션 */}

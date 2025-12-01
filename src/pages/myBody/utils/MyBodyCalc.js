@@ -205,8 +205,8 @@ function validateInputs(weight, height, muscle, bodyFat, months) {
     throw new Error('근육량과 체지방량은 0 이상이어야 합니다.');
   }
 
-  if (bodyFat < 5) {
-    throw new Error('체지방량은 최소 5kg 이상이어야 합니다. (건강 최소값)');
+  if (bodyFat < weight * 0.05) {
+    throw new Error('체지방량이 너무 낮습니다. 체지방률을 확인해주세요.');
   }
 
   const bmi = getBmi(weight, height);
