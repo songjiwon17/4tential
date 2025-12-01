@@ -23,7 +23,8 @@ const MyBodyPredictedChanges = () => {
   const height = parseFloat(profileData.height) || 158;
   const weight = parseFloat(profileData.weight) || 60;
   const muscle = parseFloat(profileData.muscle) || 21;
-  const bodyFat = parseFloat(profileData.bodyFat) || 28;
+  const bodyFatPercent = parseFloat(profileData.bodyFat) || 25; // 체지방률(%)
+  const bodyFat = weight * (bodyFatPercent / 100); // ✅ 체지방량(kg)으로 변환
   const mode = profileData.type || '다이어트';
 
   const getMonths = (value) => {
@@ -74,7 +75,7 @@ const MyBodyPredictedChanges = () => {
     return <Box p={6}>로딩 중...</Box>;
   }
 
-  const bodyFatPercent = getFatPercent(displayData.weight, displayData.bodyFat);
+  //const bodyFatPercent = getFatPercent(displayData.weight, displayData.bodyFat);
   const months = getMonths(timelineValue);
 
   const getTimeLabel = () => {
