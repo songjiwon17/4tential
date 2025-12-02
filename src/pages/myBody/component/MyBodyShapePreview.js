@@ -16,7 +16,7 @@ import muscle1_1 from '../../../assets/images/muscle1-8.png'; // 3단계: 탄탄
 import muscle1_2 from '../../../assets/images/muscle1-2.png'; // 4단계: 복근 보이는
 import muscle1_3 from '../../../assets/images/muscle1-3.png'; // ✅ 추가: 과체중 근력향상용
 import muscle0 from '../../../assets/images/muscle0.png'; // 5단계: 근육질 (최종)
-
+import muscle2_1 from '../../../assets/images/muscle2-1.png';
 const MyBodyShapePreview = ({
   weight = 70,
   height = 170,
@@ -150,7 +150,7 @@ const MyBodyShapePreview = ({
     if (image === muscle1_2) {
       return '탄탄한 근육형';
     }
-    if (image === muscle1_1) {
+    if (image === muscle2 - 1) {
       return '운동 적응형';
     }
     if (image === muscle1_3) {
