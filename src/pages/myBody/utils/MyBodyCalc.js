@@ -141,11 +141,11 @@ function getMinBodyFat(weight) {
 }
 
 // FFMI 계산: 제지방량 / 키(m)^2
-function getFFMI(weight, bodyFat, height) {
-  const heightM = height / 100;
-  const leanMass = weight - bodyFat;
-  return leanMass / (heightM * heightM);
-}
+// function getFFMI(weight, bodyFat, height) {
+//   const heightM = height / 100;
+//   const leanMass = weight - bodyFat;
+//   return leanMass / (heightM * heightM);
+// }
 
 // FFMI 기반 최대 근육량 (초보자 1년 목표 상한: FFMI 21)
 function getMaxMuscle(currentWeight, height, bodyFat) {

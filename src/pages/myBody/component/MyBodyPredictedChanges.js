@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useAtomValue } from 'jotai';
 import { profileSavedAtom } from '../../../store/atoms/ProfileAtoms';
 import MyBodyShapePreview from './MyBodyShapePreview';
-import { getBodyPrediction, getFatPercent } from '../utils/MyBodyCalc';
+import { getBodyPrediction } from '../utils/MyBodyCalc';
 import {
   Box,
   Flex,
